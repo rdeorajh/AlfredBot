@@ -27,13 +27,16 @@ async def hi(ctx):
 
 @myClient.command()
 async def inspire(ctx,arg: typing.Optional[discord.Member], _str = ""):
-  if _str == "us":
-    await ctx.send(alfredQuotes.inspire())
-  elif _str == "me":
-  	await ctx.send(alfredQuotes.compliment())
-  else:
+  if isinstance(arg,discord.Member):
     nameStr = "{0.display_name}, ".format(arg)
     await ctx.send(nameStr + alfredQuotes.compliment())
+  elif _str == "me":
+  	await ctx.send(alfredQuotes.compliment())
+  elif _str == "us" or _str == "":
+    await ctx.send(alfredQuotes.inspire())
+  else:
+    await ctx.send("Forgive me, I don't quite understand. Is there any other way I can be of service?")
+    pass
   return
 
 
